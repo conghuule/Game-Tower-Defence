@@ -304,7 +304,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4465613073619842656}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -335,12 +335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87bff4f760d018b4a93b87ae63d727eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
-  maxHealth: 20
-  vertical: 1
-  changeTime: 3
+  rb: {fileID: 4117356090835305563}
   smokeEffect: {fileID: 0}
   fixClip: {fileID: 0}
+  moveSpeed: 2
+  maxHealth: 20
 --- !u!61 &4911675008687323111
 BoxCollider2D:
   m_ObjectHideFlags: 0
