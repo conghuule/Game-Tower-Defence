@@ -4,56 +4,84 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 2f;
+    [Header("References")]
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private ParticleSystem smokeEffect;
+    [SerializeField] private AudioClip fixClip;
+
+    [Header("Attributes")]
+    [SerializeField] private float moveSpeed = 3f;
     public float maxHealth = 20f;
     private float currentHealth;
-    public bool vertical;
-    Rigidbody2D rigidbody2d;
-    public float changeTime = 3.0f;
-    float timer;
-    int direction = 1;
-    Animator animator;
-
     private bool isDie = false;
-    public ParticleSystem smokeEffect;
 
-    AudioSource audioSource;
-    public AudioClip fixClip;
+    private Transform target;
+    private int pathIndex = 0;
 
-    FloatHealthBar healthBar;
+    private AudioSource audioSource;
+    private FloatHealthBar healthBar;
+    private Animator animator;
 
     void Start()
     {
         currentHealth = maxHealth;
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        timer = changeTime;
-        animator = GetComponent<Animator>();
-        healthBar = GetComponentInChildren<FloatHealthBar>();
-
+        target = LevelManager.main.path[pathIndex];
+        rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        healthBar = GetComponentInChildren<FloatHealthBar>();
+        animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        timer -= Time.deltaTime;
-        if (timer < 0)
-        {
-            direction = -direction; timer = changeTime;
-        }
-    }
     void FixedUpdate()
     {
-        Vector2 position = rigidbody2d.position;
-        if (vertical)
+        MoveToNextPoint();
+    }
+
+    void MoveToNextPoint()
+    {
+        Vector2 direction = (target.position - transform.position).normalized;
+
+        // Use MoveTowards for controlled movement
+        Vector2 newPosition = Vector2.MoveTowards(rb.position, target.position, moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPosition);
+
+        // Check if the enemy has reached the target point
+        if (Vector2.Distance(transform.position, target.position) < 0.5f)
         {
-            position.y = position.y + Time.deltaTime * speed * direction;
+            UpdateTarget();
+
+            // Check if the current target is Point 4
+            if (pathIndex == 4) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
+            {
+                // Flip the enemy's direction when reaching Point 4
+                FlipDirection();
+            }
+        }
+    }
+
+    void FlipDirection()
+    {
+        Vector3 newScale = transform.localScale;
+        newScale.x *= -1;
+        transform.localScale = newScale;
+    }
+
+    void UpdateTarget()
+    {
+        pathIndex++;
+        if (pathIndex == LevelManager.main.path.Length)
+        {
+            DestroyEnemy();
         }
         else
         {
-            position.x = position.x + Time.deltaTime * speed * direction;
+            target = LevelManager.main.path[pathIndex];
         }
-        animator.SetBool("isRunRight", direction > 0);
-        rigidbody2d.MovePosition(position);
+    }
+
+    void DestroyEnemy()
+    {
+        Die();
     }
 
     public void Die()
