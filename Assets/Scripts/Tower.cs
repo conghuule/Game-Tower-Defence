@@ -35,7 +35,6 @@ public class Tower : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            Debug.Log(distanceToEnemy);
             if (!enemy.GetComponent<Enemy>().checkIsDie() && distanceToEnemy < range && distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;

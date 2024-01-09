@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -109,6 +110,9 @@ public class Enemy : MonoBehaviour
             animator.SetBool("Die", true);
             GetComponent<Rigidbody2D>().simulated = false;
             Destroy(gameObject, 1.2f);
+
+
+            LevelManager.main.IncreaseScore();
         }
     }
 

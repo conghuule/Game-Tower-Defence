@@ -9,4 +9,13 @@ public class EventHandler : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void PauseGame()
+    {
+        LevelManager.main.PauseGame();
+    }
+
+    public void ResumeGame()
+    {
+        LevelManager.main.ResumeGame();
+    }
 }
