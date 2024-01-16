@@ -80,8 +80,9 @@ public class Enemy : MonoBehaviour
         pathIndex++;
         if (pathIndex == LevelManager.main.path.Length)
         {
+            LevelManager.main.MinusHealth();
             EnemySpawner.onEnemyDestroy.Invoke();
-            Destroy(gameObject); ;
+            Destroy(gameObject);
         }
         else
         {
