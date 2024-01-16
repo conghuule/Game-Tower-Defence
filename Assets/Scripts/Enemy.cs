@@ -130,9 +130,6 @@ public class Enemy : MonoBehaviour
             GetComponent<Rigidbody2D>().simulated = false;
             Destroy(gameObject, 1.2f);
             EnemySpawner.onEnemyDestroy.Invoke();
-
-
-            LevelManager.main.IncreaseScore();
         }
     }
 
