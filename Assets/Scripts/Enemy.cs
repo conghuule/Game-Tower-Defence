@@ -72,7 +72,8 @@ public class Enemy : MonoBehaviour
         pathIndex++;
         if (pathIndex == LevelManager.main.path.Length)
         {
-            DestroyEnemy();
+            LevelManager.main.MinusHealth();
+            Destroy(gameObject);
         }
         else
         {

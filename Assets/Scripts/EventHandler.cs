@@ -7,6 +7,7 @@ public class EventHandler : MonoBehaviour
 {
     public void BackToChooseLevel()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
     public void PauseGame()
@@ -17,5 +18,15 @@ public class EventHandler : MonoBehaviour
     public void ResumeGame()
     {
         LevelManager.main.ResumeGame();
+    }
+
+    public void OpenStore()
+    {
+        LevelManager.main.OpenStore();
+    }
+
+    public void CloseStore()
+    {
+        LevelManager.main.CloseStore();
     }
 }
