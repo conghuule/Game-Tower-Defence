@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public Transform startPoint;
     public Transform[] path;
 
+    public Transform flipPoint;
+
     public int currency;
 
     private int score = 0;
@@ -23,7 +25,6 @@ public class LevelManager : MonoBehaviour
     public int maxEnemyAllow = 5;
 
     public GameObject gameResult;
-
     private void Awake()
     {
         main = this;
@@ -34,7 +35,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currency = 100;
+        currency = 20;
     }
 
     public void IncreaseCurrency(int amount)
@@ -92,7 +93,7 @@ public class LevelManager : MonoBehaviour
         temp.x = maxEnemyAllow;
         healthProcess.transform.localScale = temp;
 
-        if(maxEnemyAllow == 0)
+        if (maxEnemyAllow == 0)
         {
             Time.timeScale = 0;
             gameResult.SetActive(true);

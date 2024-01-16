@@ -31,6 +31,13 @@ public class Enemy : MonoBehaviour
         maxHealth = 20f;
     }
 
+    public void SetMaxHealth(float newMaxHealth)
+    {
+        maxHealth = newMaxHealth;
+        currentHealth = maxHealth; // Reset currentHealth when maxHealth changes
+    }
+
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -60,7 +67,7 @@ public class Enemy : MonoBehaviour
             UpdateTarget();
 
             // Check if the current target is Point 4
-            if (pathIndex == 6) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
+            if (target.position == LevelManager.main.flipPoint.position) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
             {
                 // Flip the enemy's direction when reaching Point 4
                 FlipDirection();
@@ -121,6 +128,7 @@ public class Enemy : MonoBehaviour
             animator.SetBool("Die", true);
             GetComponent<Rigidbody2D>().simulated = false;
             Destroy(gameObject, 1.2f);
+            EnemySpawner.onEnemyDestroy.Invoke();
 
 
             LevelManager.main.IncreaseScore();
