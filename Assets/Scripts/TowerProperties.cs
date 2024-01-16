@@ -27,16 +27,36 @@ public class TowerProperties : MonoBehaviour
             buttonSell.onClick.AddListener(Sell);
         if (buttonRemove != null)
             buttonRemove.onClick.AddListener(Destroy);
+
+        if (tower != null && buttonUpgrade != null)
+        {
+            buttonUpgrade.interactable = (tower.level < 3);
+        }
+    }
+
+    void Update()
+    {
+        if (tower != null && tower.priceUpgrade > LevelManager.main.currency)
+        {
+            buttonUpgrade.interactable = false;
+        }
     }
 
 
     void upgradeTower()
     {
-        tower.Upgrade();
+        Debug.Log(LevelManager.main.currency);
+        if (tower.priceUpgrade <= LevelManager.main.currency)
+        {
+            LevelManager.main.SpendCurrency(tower.priceUpgrade);
+            tower.Upgrade();
+        }
+            
     }
 
     void Sell()
     {
+        LevelManager.main.IncreaseCurrency(tower.priceSell);
         Destroy(tower.gameObject);
         Destroy(gameObject);
     }
@@ -70,7 +90,7 @@ public class TowerProperties : MonoBehaviour
             }
             if (textUpgrade != null)
             {
-                textUpgrade.text = $"Upgrade: {tower.priceUpgrade}";
+                textUpgrade.text = tower.priceUpgrade == 0 ? "Upgrade" : $"Upgrade: {tower.priceUpgrade}";
             }
             if (textSell != null)
             {

@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     public int damage = 10;  // Damage dealt to enemies
     public Transform target;  // Target enemy to follow
     public GameObject explosionPrefab;
+    public float slow = 0f;
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
@@ -35,7 +36,16 @@ public class Bullet : MonoBehaviour
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
-    void HitTarget()
+    protected void slowEnemy() {
+        // Deal damage to the enemy
+        Enemy enemy = target.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeSlow(1, slow);
+        }
+    }
+
+    public virtual void HitTarget()
     {
         // Deal damage to the enemy
         Enemy enemy = target.GetComponent<Enemy>();

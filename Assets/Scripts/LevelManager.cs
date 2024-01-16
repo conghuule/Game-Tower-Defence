@@ -12,8 +12,6 @@ public class LevelManager : MonoBehaviour
 
     public int currency;
 
-    private int score = 0;
-
     public TextMeshProUGUI scoreText;
 
     public GameObject gameMenu;
@@ -34,12 +32,14 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currency = 100;
+        currency = 20;
+        scoreText.text = currency.ToString();
     }
 
     public void IncreaseCurrency(int amount)
     {
         currency += amount;
+        scoreText.text = currency.ToString();
     }
 
     public bool SpendCurrency(int amount)
@@ -55,12 +55,6 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Not enough currency");
             return false;
         }
-    }
-
-    public void IncreaseScore()
-    {
-        score += 1;
-        scoreText.text = score.ToString();
     }
 
     public void PauseGame()

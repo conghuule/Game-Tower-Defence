@@ -382,8 +382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smokeEffect: {fileID: 0}
   fixClip: {fileID: 0}
+  currencyWorth: 1
   moveSpeed: 2
-  maxHealth: 20
 --- !u!1 &4720815956767347142
 GameObject:
   m_ObjectHideFlags: 0

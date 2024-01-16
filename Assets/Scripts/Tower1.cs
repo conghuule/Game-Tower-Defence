@@ -5,8 +5,9 @@ public class Tower1 : Tower
     int[] dameLevel = { 10, 20, 40 };
     float[] rangeLevel = { 3, 4, 5 };
     float[] rateLevel = { 1, 1.2f, 1.5f };
-    int[] upgradePriceLevel = { 20, 40, 10000 };
+    int[] upgradePriceLevel = { 20, 40, 0 };
     int[] sellPriceLevel = { 5, 10, 15 };
+    float[] slowLevel = { 0.2f, 0.4f, 0.7f };
 
     public GameObject towerPrefabLevel2;
     public GameObject towerPrefabLevel3;
@@ -18,12 +19,11 @@ public class Tower1 : Tower
         fireRate = rateLevel[level - 1];
         priceUpgrade = upgradePriceLevel[level - 1];
         priceSell = sellPriceLevel[level - 1];
+        slow = slowLevel[level - 1];
     }
 
     public override void Upgrade()
     {
-        Debug.Log("Upgrade in Tower1");
-
         // Instantiate the appropriate prefab based on the tower's level
         GameObject upgradedTowerPrefab = (level == 1) ? towerPrefabLevel2 : towerPrefabLevel3;
         GameObject upgradedTowerObject = Instantiate(upgradedTowerPrefab, transform.position, transform.rotation);

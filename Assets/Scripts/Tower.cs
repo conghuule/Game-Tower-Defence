@@ -65,6 +65,7 @@ public class Tower : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, new Vector2(firePoint.position.x, firePoint.position.y + 1.5f), firePoint.rotation);
         bullet.GetComponent<Bullet>().damage = dame;
+        bullet.GetComponent<Bullet>().slow = slow;
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
