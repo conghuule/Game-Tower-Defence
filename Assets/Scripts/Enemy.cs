@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private AudioClip fixClip;
 
+    [SerializeField] private int currencyWorth = 50;
+
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 3f;
     public float maxHealth = 20f;
@@ -72,7 +74,8 @@ public class Enemy : MonoBehaviour
         pathIndex++;
         if (pathIndex == LevelManager.main.path.Length)
         {
-            DestroyEnemy();
+            EnemySpawner.onEnemyDestroy.Invoke();
+            Destroy(gameObject); ;
         }
         else
         {
@@ -107,6 +110,7 @@ public class Enemy : MonoBehaviour
         if (isEnemyDie)
         {
             isDie = isEnemyDie;
+            LevelManager.main.IncreaseCurrency(currencyWorth);
             animator.SetBool("Die", true);
             GetComponent<Rigidbody2D>().simulated = false;
             Destroy(gameObject, 1.2f);
