@@ -11,6 +11,14 @@ public class EventHandler : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(1);
     }
+
+    public void GoToNextLevel()
+    {
+        LevelManager.main.currentLevel += 1;
+        Debug.Log("CURRENT LEVEL: "+ LevelManager.main.currentLevel);
+        SceneManager.LoadScene(LevelManager.main.currentLevel + 1);
+    }
+
     public void PauseGame()
     {
         LevelManager.main.PauseGame();

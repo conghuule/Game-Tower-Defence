@@ -21,6 +21,9 @@ public class LevelManager : MonoBehaviour
     public int maxEnemyAllow = 5;
 
     public GameObject gameResult;
+    public GameObject plots;
+
+    public int currentLevel = 1;
 
     public AudioClip upgradeClip;
     public AudioClip DieClip;
@@ -91,11 +94,16 @@ public class LevelManager : MonoBehaviour
         temp.x = maxEnemyAllow;
         healthProcess.transform.localScale = temp;
 
-        if(maxEnemyAllow == 0)
+        if (maxEnemyAllow == 0)
         {
             Time.timeScale = 0;
             gameResult.SetActive(true);
         }
+    }
+
+    public void hidePlots()
+    {
+        plots.SetActive(false);
     }
 
     public void PlayUpgradeClip()

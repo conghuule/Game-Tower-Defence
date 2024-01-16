@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameResult : MonoBehaviour
 {
     public TextMeshProUGUI titleText;
+    public GameObject nextLevelButton;
     public GameObject start1;
     public GameObject start2;
     public GameObject start3;
@@ -15,6 +16,7 @@ public class GameResult : MonoBehaviour
         switch (LevelManager.main.maxEnemyAllow) {
             case 0:
                 titleText.text = "You lose";
+                nextLevelButton.SetActive(false);
                 start1.SetActive(false);
                 start2.SetActive(false);
                 start3.SetActive(false);
@@ -22,6 +24,7 @@ public class GameResult : MonoBehaviour
             case 1:
             case 2:
                 titleText.text = "You win";
+                nextLevelButton.SetActive(true);
                 start1.SetActive(false);
                 start2.SetActive(true);
                 start3.SetActive(false);
@@ -29,12 +32,14 @@ public class GameResult : MonoBehaviour
             case 3:
             case 4:
                 titleText.text = "You win";
+                nextLevelButton.SetActive(true);
                 start1.SetActive(true);
                 start2.SetActive(false);
                 start3.SetActive(true);
                 break;
             case 5:
                 titleText.text = "You win";
+                nextLevelButton.SetActive(true);
                 start1.SetActive(true);
                 start2.SetActive(true);
                 start3.SetActive(true);
