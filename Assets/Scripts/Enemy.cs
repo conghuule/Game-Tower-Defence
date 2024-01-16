@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 2f;
-
     public virtual float maxHealth { get; protected set; } = 20f;
     protected float currentHealth;
     protected bool isDie = false;
@@ -93,25 +92,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void DestroyEnemy()
-    {
-        Die();
-    }
-
-    public void Die()
-    {
-        GetComponent<Rigidbody2D>().simulated = false;
-        animator.SetTrigger("Fixed");
-        Destroy(smokeEffect.gameObject);
-
-        PlaySound(fixClip);
-    }
-
-    public void PlaySound(AudioClip clip)
-    {
-        audioSource.PlayOneShot(clip);
-    }
-
     public virtual void TakeSlow(float slowDuration, float slowAmount)
     {
         originalSpeedMultiplier = speedMultiplier;
@@ -136,6 +116,7 @@ public class Enemy : MonoBehaviour
         bool isEnemyDie = currentHealth <= 0;
         if (isEnemyDie)
         {
+            LevelManager.main.PlayDieClip();
             isDie = isEnemyDie;
             LevelManager.main.IncreaseCurrency(currencyWorth);
             animator.SetBool("Die", true);

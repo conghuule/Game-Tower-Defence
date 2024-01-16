@@ -20,6 +20,7 @@ public class Tower : MonoBehaviour
     private GameObject towerPropertiesCanvas;
     public GameObject towerPropertiesPrefab;
 
+
     void Update()
     {
         if (Time.time >= nextFireTime)
@@ -63,6 +64,7 @@ public class Tower : MonoBehaviour
 
     protected virtual void FireAt(Transform target)
     {
+
         GameObject bullet = Instantiate(bulletPrefab, new Vector2(firePoint.position.x, firePoint.position.y + 1.5f), firePoint.rotation);
         bullet.GetComponent<Bullet>().damage = dame;
         bullet.GetComponent<Bullet>().slow = slow;
