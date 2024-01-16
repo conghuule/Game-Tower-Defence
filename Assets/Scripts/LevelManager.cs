@@ -14,8 +14,6 @@ public class LevelManager : MonoBehaviour
 
     public int currency;
 
-    private int score = 0;
-
     public TextMeshProUGUI scoreText;
 
     public GameObject gameMenu;
@@ -25,6 +23,14 @@ public class LevelManager : MonoBehaviour
     public int maxEnemyAllow = 5;
 
     public GameObject gameResult;
+    public GameObject plots;
+
+    public int currentLevel = 1;
+
+    public AudioClip upgradeClip;
+    public AudioClip DieClip;
+    AudioSource audioSource;
+
     private void Awake()
     {
         main = this;
@@ -35,12 +41,15 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currency = 20;
+        audioSource = GetComponent<AudioSource>();
+        currency = 40;
+        scoreText.text = currency.ToString();
     }
 
     public void IncreaseCurrency(int amount)
     {
         currency += amount;
+        scoreText.text = currency.ToString();
     }
 
     public bool SpendCurrency(int amount)
@@ -56,12 +65,6 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Not enough currency");
             return false;
         }
-    }
-
-    public void IncreaseScore()
-    {
-        score += 1;
-        scoreText.text = score.ToString();
     }
 
     public void PauseGame()
@@ -98,5 +101,22 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 0;
             gameResult.SetActive(true);
         }
+    }
+
+    public void hidePlots()
+    {
+        plots.SetActive(false);
+    }
+
+    public void PlayUpgradeClip()
+    {
+        audioSource.clip = upgradeClip;
+        audioSource.Play();
+    }
+
+    public void PlayDieClip()
+    {
+        audioSource.clip = DieClip;
+        audioSource.Play();
     }
 }

@@ -11,12 +11,12 @@ public class event_handler : MonoBehaviour
     }
 
     public void GoToLevel2() {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void GoToLevel3()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
     }
 
     public void BackToMenu()

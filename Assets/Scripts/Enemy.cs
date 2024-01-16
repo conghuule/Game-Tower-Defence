@@ -9,11 +9,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private AudioClip fixClip;
 
-    [SerializeField] private int currencyWorth = 50;
+    [SerializeField] private int currencyWorth = 1;
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 2f;
-
     public virtual float maxHealth { get; protected set; } = 20f;
     protected float currentHealth;
     protected bool isDie = false;
@@ -25,6 +24,9 @@ public class Enemy : MonoBehaviour
     protected AudioSource audioSource;
     protected FloatHealthBar healthBar;
     protected Animator animator;
+
+    protected float speedMultiplier = 1f;
+    protected float originalSpeedMultiplier = 1f;
 
     public Enemy()
     {
@@ -58,7 +60,7 @@ public class Enemy : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
 
         // Use MoveTowards for controlled movement
-        Vector2 newPosition = Vector2.MoveTowards(rb.position, target.position, moveSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = Vector2.MoveTowards(rb.position, target.position, moveSpeed * speedMultiplier * Time.fixedDeltaTime);
         rb.MovePosition(newPosition);
 
         // Check if the enemy has reached the target point
@@ -97,32 +99,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void DestroyEnemy()
+    public virtual void TakeSlow(float slowDuration, float slowAmount)
     {
-        Die();
+        originalSpeedMultiplier = speedMultiplier;
+
+        speedMultiplier = 1 - slowAmount;
+
+        StartCoroutine(RevertSlowEffect(slowDuration));
     }
 
-    public void Die()
+    IEnumerator RevertSlowEffect(float duration)
     {
-        GetComponent<Rigidbody2D>().simulated = false;
-        animator.SetTrigger("Fixed");
-        Destroy(smokeEffect.gameObject);
+        yield return new WaitForSeconds(duration);
 
-        PlaySound(fixClip);
-    }
-
-    public void PlaySound(AudioClip clip)
-    {
-        audioSource.PlayOneShot(clip);
+        speedMultiplier = originalSpeedMultiplier;
     }
 
     public virtual void TakeDamage(float dame)
     {
         currentHealth -= dame;
-        healthBar.updateHealthBar(currentHealth, maxHealth);
+        if (healthBar != null)
+            healthBar.updateHealthBar(currentHealth, maxHealth);
         bool isEnemyDie = currentHealth <= 0;
         if (isEnemyDie)
         {
+            LevelManager.main.PlayDieClip();
             isDie = isEnemyDie;
             LevelManager.main.IncreaseCurrency(currencyWorth);
             animator.SetBool("Die", true);

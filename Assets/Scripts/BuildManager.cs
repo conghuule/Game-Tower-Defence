@@ -8,8 +8,9 @@ public class BuildManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameObject[] towerPrefabs;
+    public GameObject plots;
 
-    private int selectedTower = 0;
+    private int selectedTower = -1;
 
     private void Awake()
     {
@@ -23,6 +24,14 @@ public class BuildManager : MonoBehaviour
 
     public void SetSelectedTower(int index)
     {
-        selectedTower = index;
+        if(selectedTower == index)
+        {
+            selectedTower = -1;
+            plots.SetActive(false);
+        } else
+        {
+            selectedTower = index;
+            plots.SetActive(true);
+        }
     }
 }

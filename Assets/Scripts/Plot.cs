@@ -8,12 +8,18 @@ public class Plot : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
 
-    private GameObject tower;
+    public GameObject tower;
     private Color startColor;
 
     void Start()
     {
+
         startColor = sr.color;
+    }
+
+    void Update()
+    {
+        if (tower != null) gameObject.SetActive(false);
     }
 
     private void OnMouseEnter()
@@ -31,7 +37,9 @@ public class Plot : MonoBehaviour
         if (tower != null) return;
 
         GameObject towerToBuild = BuildManager.main.GetSelectedTower();
-        tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        Vector3 towerPosition = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
+        tower = Instantiate(towerToBuild, towerPosition, Quaternion.identity);
+        LevelManager.main.hidePlots();
     }
 
 }
