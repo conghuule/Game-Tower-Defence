@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public Transform startPoint;
     public Transform[] path;
 
+    public Transform flipPoint;
+
     public int currency;
 
     public TextMeshProUGUI scoreText;
