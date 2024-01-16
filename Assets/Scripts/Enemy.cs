@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private AudioClip fixClip;
 
-    [SerializeField] private int currencyWorth = 50;
+    [SerializeField] private int currencyWorth = 1;
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 2f;
@@ -25,6 +25,9 @@ public class Enemy : MonoBehaviour
     protected AudioSource audioSource;
     protected FloatHealthBar healthBar;
     protected Animator animator;
+
+    protected float speedMultiplier = 1f;
+    protected float originalSpeedMultiplier = 1f;
 
     public Enemy()
     {
@@ -51,7 +54,7 @@ public class Enemy : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
 
         // Use MoveTowards for controlled movement
-        Vector2 newPosition = Vector2.MoveTowards(rb.position, target.position, moveSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = Vector2.MoveTowards(rb.position, target.position, moveSpeed * speedMultiplier * Time.fixedDeltaTime);
         rb.MovePosition(newPosition);
 
         // Check if the enemy has reached the target point
@@ -60,7 +63,7 @@ public class Enemy : MonoBehaviour
             UpdateTarget();
 
             // Check if the current target is Point 4
-            if (pathIndex == 4) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
+            if (pathIndex == 6) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
             {
                 // Flip the enemy's direction when reaching Point 4
                 FlipDirection();
@@ -109,10 +112,27 @@ public class Enemy : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
+    public virtual void TakeSlow(float slowDuration, float slowAmount)
+    {
+        originalSpeedMultiplier = speedMultiplier;
+
+        speedMultiplier = 1 - slowAmount;
+
+        StartCoroutine(RevertSlowEffect(slowDuration));
+    }
+
+    IEnumerator RevertSlowEffect(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        speedMultiplier = originalSpeedMultiplier;
+    }
+
     public virtual void TakeDamage(float dame)
     {
         currentHealth -= dame;
-        healthBar.updateHealthBar(currentHealth, maxHealth);
+        if (healthBar != null)
+            healthBar.updateHealthBar(currentHealth, maxHealth);
         bool isEnemyDie = currentHealth <= 0;
         if (isEnemyDie)
         {
@@ -121,9 +141,6 @@ public class Enemy : MonoBehaviour
             animator.SetBool("Die", true);
             GetComponent<Rigidbody2D>().simulated = false;
             Destroy(gameObject, 1.2f);
-
-
-            LevelManager.main.IncreaseScore();
         }
     }
 

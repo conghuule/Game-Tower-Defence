@@ -20,4 +20,9 @@ public class BuildManager : MonoBehaviour
     {
         return towerPrefabs[selectedTower];
     }
+
+    public void SetSelectedTower(int index)
+    {
+        selectedTower = index;
+    }
 }
