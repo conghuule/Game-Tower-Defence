@@ -6,24 +6,30 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private AudioClip fixClip;
 
     [SerializeField] private int currencyWorth = 50;
 
     [Header("Attributes")]
-    [SerializeField] private float moveSpeed = 3f;
-    public float maxHealth = 20f;
-    private float currentHealth;
-    private bool isDie = false;
+    [SerializeField] private float moveSpeed = 2f;
 
-    private Transform target;
-    private int pathIndex = 0;
+    public virtual float maxHealth { get; protected set; } = 20f;
+    protected float currentHealth;
+    protected bool isDie = false;
 
-    private AudioSource audioSource;
-    private FloatHealthBar healthBar;
-    private Animator animator;
+    protected Transform target;
+    protected int pathIndex = 0;
+    Rigidbody2D rb;
+
+    protected AudioSource audioSource;
+    protected FloatHealthBar healthBar;
+    protected Animator animator;
+
+    public Enemy()
+    {
+        maxHealth = 20f;
+    }
 
     void Start()
     {
@@ -102,7 +108,7 @@ public class Enemy : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
-    public void TakeDamage(float dame)
+    public virtual void TakeDamage(float dame)
     {
         currentHealth -= dame;
         healthBar.updateHealthBar(currentHealth, maxHealth);
