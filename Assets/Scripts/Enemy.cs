@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
             UpdateTarget();
 
             // Check if the current target is Point 4
-            if (pathIndex == 4) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
+            if (pathIndex == 6) // assuming index 3 corresponds to Point 4 (arrays start from index 0)
             {
                 // Flip the enemy's direction when reaching Point 4
                 FlipDirection();
