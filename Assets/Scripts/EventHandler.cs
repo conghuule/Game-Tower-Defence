@@ -7,7 +7,7 @@ public class EventHandler : MonoBehaviour
 {
     public void BackToChooseLevel()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void PauseGame()
     {

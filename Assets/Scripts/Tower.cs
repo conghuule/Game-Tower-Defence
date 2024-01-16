@@ -6,7 +6,7 @@ public class Tower : MonoBehaviour
     public GameObject bulletPrefab;  // Prefab of the bullet
     public float fireRate = 1f;  // Rate of fire in shots per second
     private float nextFireTime = 0f;  // Time until the tower can fire again
-    private float range = 2f;  // Time until the tower can fire again
+    private float range = 4.5f;  // Time until the tower can fire again
 
     void Update()
     {
@@ -25,6 +25,7 @@ public class Tower : MonoBehaviour
 
     GameObject FindNearestEnemy()
     {
+
         // Find all GameObjects with the "Enemy" tag
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -35,10 +36,12 @@ public class Tower : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+
             if (!enemy.GetComponent<Enemy>().checkIsDie() && distanceToEnemy < range && distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
+
             }
         }
 
