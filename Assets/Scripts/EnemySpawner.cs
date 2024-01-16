@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
     private int currentWave = 1;
-    private int totalWaves = 3;
+    public int totalWaves = 3;
     private float timeSinceLastWave;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         timeSinceLastWave = 0f;
-        if (currentWave == totalWaves)
+        if (currentWave == totalWaves && enemiesAlive == 0)
         {
             // Win
             Debug.Log("You win");
