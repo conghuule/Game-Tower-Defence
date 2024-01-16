@@ -13,7 +13,7 @@ public class Plot : MonoBehaviour
 
     void Start()
     {
-       
+
         startColor = sr.color;
     }
 
@@ -37,7 +37,8 @@ public class Plot : MonoBehaviour
         if (tower != null) return;
 
         GameObject towerToBuild = BuildManager.main.GetSelectedTower();
-        tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        Vector3 towerPosition = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
+        tower = Instantiate(towerToBuild, towerPosition, Quaternion.identity);
         LevelManager.main.hidePlots();
     }
 

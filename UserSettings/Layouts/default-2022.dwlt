@@ -969,7 +969,7 @@ MonoBehaviour:
     x: 314.26416
     y: 72.452835
     width: 1130.9812
-    height: 513.33966
+    height: 563.15094
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -987,6 +987,8 @@ MonoBehaviour:
     - {fileID: 4115396934572189290, guid: 52874bcb2c808d24db513dec48596e59, type: 2}
     - {fileID: 4115396934572189290, guid: 39790b9bd609e3541ba11accad2fa305, type: 2}
     - {fileID: 6275317914949068702, guid: ed1cc90d0ad79c845906bf8309a8c2c2, type: 2}
+    - {fileID: -8363555088900462610, guid: d1630609224b7e549959e136039d5a79, type: 2}
+    - {fileID: -8363555088900462610, guid: 7a695de54d8dac644ab9f13252134409, type: 2}
     m_ValueSerializationHelper:
     - e00: 1
       e01: 0
@@ -1068,10 +1070,42 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 0.94653434
+      e01: 0
+      e02: 0
+      e03: -32.32669
+      e10: 0
+      e11: 0.94653434
+      e12: 0
+      e13: 162.80258
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.94653434
+      e01: 0
+      e02: 0
+      e03: -32.32669
+      e10: 0
+      e11: 0.94653434
+      e12: 0
+      e13: 153.33725
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 38ef37a89a6b510419ab3b87119fcd1a, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 7a695de54d8dac644ab9f13252134409, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 4652913556321263593, guid: 38ef37a89a6b510419ab3b87119fcd1a, type: 2}
+  - m_Target: {fileID: -8363555088900462610, guid: 7a695de54d8dac644ab9f13252134409, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}

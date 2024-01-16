@@ -7,6 +7,15 @@ public class Bullet : MonoBehaviour
     public Transform target;  // Target enemy to follow
     public GameObject explosionPrefab;
     public float slow = 0f;
+
+    public AudioClip shootClip;
+    AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        PlayShootClip();
+    }
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
@@ -61,5 +70,11 @@ public class Bullet : MonoBehaviour
         Destroy(explosion, 0.5f);
         // Destroy the bullet
         Destroy(gameObject);
+    }
+
+    public void PlayShootClip()
+    {
+        audioSource.clip = shootClip;
+        audioSource.Play();
     }
 }

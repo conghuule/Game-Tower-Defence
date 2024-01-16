@@ -25,6 +25,10 @@ public class LevelManager : MonoBehaviour
 
     public int currentLevel = 1;
 
+    public AudioClip upgradeClip;
+    public AudioClip DieClip;
+    AudioSource audioSource;
+
     private void Awake()
     {
         main = this;
@@ -35,7 +39,8 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currency = 20;
+        audioSource = GetComponent<AudioSource>();
+        currency = 40;
         scoreText.text = currency.ToString();
     }
 
@@ -89,7 +94,7 @@ public class LevelManager : MonoBehaviour
         temp.x = maxEnemyAllow;
         healthProcess.transform.localScale = temp;
 
-        if(maxEnemyAllow == 0)
+        if (maxEnemyAllow == 0)
         {
             Time.timeScale = 0;
             gameResult.SetActive(true);
@@ -99,5 +104,17 @@ public class LevelManager : MonoBehaviour
     public void hidePlots()
     {
         plots.SetActive(false);
+    }
+
+    public void PlayUpgradeClip()
+    {
+        audioSource.clip = upgradeClip;
+        audioSource.Play();
+    }
+
+    public void PlayDieClip()
+    {
+        audioSource.clip = DieClip;
+        audioSource.Play();
     }
 }

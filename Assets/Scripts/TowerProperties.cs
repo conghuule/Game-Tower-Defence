@@ -32,6 +32,7 @@ public class TowerProperties : MonoBehaviour
         {
             buttonUpgrade.interactable = (tower.level < 3);
         }
+
     }
 
     void Update()
@@ -45,7 +46,7 @@ public class TowerProperties : MonoBehaviour
 
     void upgradeTower()
     {
-        Debug.Log(LevelManager.main.currency);
+        LevelManager.main.PlayUpgradeClip();
         if (tower.priceUpgrade <= LevelManager.main.currency)
         {
             LevelManager.main.SpendCurrency(tower.priceUpgrade);
