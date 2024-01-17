@@ -14,7 +14,16 @@ public class EventHandler : MonoBehaviour
     public void GoToNextLevel()
     {
         LevelManager.main.currentLevel += 1;
-        SceneManager.LoadScene(LevelManager.main.currentLevel + 1);
+        int currentScenceIndex = LevelManager.main.currentLevel + 1;
+        Debug.Log(LevelManager.main.currentLevel + " - " + currentScenceIndex);
+        if (currentScenceIndex > 4)
+        {
+            BackToChooseLevel();
+        }
+        else
+        {
+            SceneManager.LoadScene(currentScenceIndex);
+        }
     }
 
     public void PauseGame()

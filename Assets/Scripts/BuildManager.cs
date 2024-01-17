@@ -30,7 +30,7 @@ public class BuildManager : MonoBehaviour
             plots.SetActive(false);
         } else
         {
-            if (LevelManager.main.currency > 10)
+            if (LevelManager.main.currency >= 10)
             {
                 selectedTower = index;
                 plots.SetActive(true);
