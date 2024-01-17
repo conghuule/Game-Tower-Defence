@@ -8,14 +8,12 @@ public class EventHandler : MonoBehaviour
     public void BackToChooseLevel()
     {
         Time.timeScale = 1;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(1);
     }
 
     public void GoToNextLevel()
     {
         LevelManager.main.currentLevel += 1;
-        Debug.Log("CURRENT LEVEL: "+ LevelManager.main.currentLevel);
         SceneManager.LoadScene(LevelManager.main.currentLevel + 1);
     }
 

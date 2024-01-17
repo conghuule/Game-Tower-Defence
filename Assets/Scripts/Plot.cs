@@ -39,7 +39,9 @@ public class Plot : MonoBehaviour
         GameObject towerToBuild = BuildManager.main.GetSelectedTower();
         Vector3 towerPosition = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
         tower = Instantiate(towerToBuild, towerPosition, Quaternion.identity);
+
         LevelManager.main.hidePlots();
+        LevelManager.main.SpendCurrency(10);
     }
 
 }

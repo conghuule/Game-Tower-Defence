@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
         {
             //BUY ITEM
             currency -= amount;
+            scoreText.text = currency.ToString();
             return true;
         }
         else

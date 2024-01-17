@@ -24,14 +24,18 @@ public class BuildManager : MonoBehaviour
 
     public void SetSelectedTower(int index)
     {
+        Debug.Log("INDEX: " + index);
         if(selectedTower == index)
         {
             selectedTower = -1;
             plots.SetActive(false);
         } else
         {
-            selectedTower = index;
-            plots.SetActive(true);
+            if (LevelManager.main.currency > 10)
+            {
+                selectedTower = index;
+                plots.SetActive(true);
+            }
         }
     }
 }
