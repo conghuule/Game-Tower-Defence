@@ -117,15 +117,15 @@ public class EnemySpawner : MonoBehaviour
         }
         else if (level == 2)
         {
-            if (prefab == enemyPrefabs[0]) return 60f;
-            if (prefab == enemyPrefabs[1]) return 100f;
-            if (prefab == enemyPrefabs[2]) return 150f;
+            if (prefab == enemyPrefabs[0]) return 40f;
+            if (prefab == enemyPrefabs[1]) return 70f;
+            if (prefab == enemyPrefabs[2]) return 120f;
         }
         else if (level == 3)
         {
-            if (prefab == enemyPrefabs[0]) return 100f;
-            if (prefab == enemyPrefabs[1]) return 150f;
-            if (prefab == enemyPrefabs[2]) return 200f;
+            if (prefab == enemyPrefabs[0]) return 50f;
+            if (prefab == enemyPrefabs[1]) return 80f;
+            if (prefab == enemyPrefabs[2]) return 150f;
         }
 
         // Default max health value

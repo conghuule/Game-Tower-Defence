@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     public GameObject plots;
 
     public int currentLevel = 1;
+    int[] currencyLevel = { 40, 60, 80 };
 
     public AudioClip upgradeClip;
     public AudioClip DieClip;
@@ -42,7 +43,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        currency = 40;
+        currency = currencyLevel[currentLevel - 1];
         scoreText.text = currency.ToString();
     }
 

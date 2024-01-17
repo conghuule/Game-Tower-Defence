@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tower3 : Tower
 {
-    int[] dameLevel = { 10, 20, 40 };
+    int[] dameLevel = { 15, 30, 50 };
     float[] rangeLevel = { 3, 4, 5 };
     float[] rateLevel = { 1, 1.2f, 1.5f };
     int[] upgradePriceLevel = { 20, 40, 0 };

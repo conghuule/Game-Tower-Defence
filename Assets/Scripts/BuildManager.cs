@@ -24,7 +24,6 @@ public class BuildManager : MonoBehaviour
 
     public void SetSelectedTower(int index)
     {
-        Debug.Log("INDEX: " + index);
         if(selectedTower == index)
         {
             selectedTower = -1;
